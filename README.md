@@ -44,18 +44,12 @@ or if you're using https
 git clone https://github.com/AustinPardosi/Countrypedia.git
 ```
 
-then, go into directory `src` in this repository
-
-```sh
-cd Countrypedia/src
-```
-
 ### 2. Install Dependencies
 
 Install all dependencies that are required by writing this command
 
 ```sh
-npm run install
+npm install
 ```
 
 ### 3. Running the Application
