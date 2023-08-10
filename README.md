@@ -1,46 +1,75 @@
-# Getting Started with Create React App
+# Countrypedia Website
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> Countrypedia is a web application that provides information about different countries, including their flag, basic information, and more. <br>
+> Link deployment: https://countrypedia-one.vercel.app/
 
-## Available Scripts
+## Table of Contents
 
-In the project directory, you can run:
+- [Prerequisites](#prerequisites)
+- [Technology Used](#technology-used)
+- [Installation](#installation)
+- [Application Display](#application-display)
 
-### `npm start`
+## Prerequisites
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Before you begin, ensure you have the following installed on your machine:
+- [Node.js](https://nodejs.org/en) (version 16.x or higher)
+- [npm](https://www.npmjs.com/n) (usually comes with Node.js installation)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Technology Used
 
-### `npm test`
+Countrypedia is built using the following technologies and libraries:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- [React](https://react.dev) - JavaScript library for building user interfaces
+- [Chakra UI](https://chakra-ui.com) - Component library for React applications
+- [Apollo Client](https://www.apollographql.com/docs/react) - GraphQL client for React
+- [Framer Motion](https://www.framer.com/motion) - Animation library for React
+- [GraphQL](https://graphql.org/) - Query language for APIs
 
-### `npm run build`
+For a complete list of dependencies, please refer to the package.json file.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Installation
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 1. Clone Repo
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Clone repository by writing this command
 
-### `npm run eject`
+```sh
+git clone git@github.com:AustinPardosi/Countrypedia.git
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+or if you're using https
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```sh
+git clone https://github.com/AustinPardosi/Countrypedia.git
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+then, go into directory `src` in this repository
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```sh
+cd Countrypedia/src
+```
 
-## Learn More
+### 2. Install Dependencies
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Install all dependencies that are required by writing this command
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```sh
+npm run install
+```
+
+### 3. Running the Application
+
+To start the Countrypedia website locally, run the following command
+
+```sh
+npm start
+```
+
+This command will launch the development server and open the application in your default web browser. If the browser doesn't open automatically, you can access the application by navigating to `https://localhost:3000` in your browser.
+
+## Application Display
+
+<img src="https://i.ibb.co/M72DvcS/Screenshot-2023-08-10-142458.png" width="600">
+<img src="https://i.ibb.co/h93VnQg/Screenshot-2023-08-10-142534.png" width="600">
+<img src="https://i.ibb.co/stmLVfZ/Screenshot-2023-08-10-142617.png">
