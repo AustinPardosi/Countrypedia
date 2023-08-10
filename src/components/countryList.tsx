@@ -19,10 +19,13 @@ import {
   Spacer,
 } from "@chakra-ui/react";
 import { FaSearch, FaBars } from "react-icons/fa";
+import { useInView } from "react-intersection-observer";
+import { motion } from "framer-motion";
 
 import client from "../api/api";
 import CountryCard from "./card";
 import { Country } from "./card";
+import AnimatedCountryCard from "./animatedCard";
 
 const countryListQuery = gql`
   query {
@@ -42,30 +45,53 @@ const countryListQuery = gql`
   }
 `;
 
+const LoadingAnimation = () => (
+  <Box
+    position="fixed"
+    top="0"
+    left="0"
+    width="100vw"
+    height="100vh"
+    display="flex"
+    justifyContent="center"
+    alignItems="center"
+    backgroundColor="gray.900"
+    zIndex="1000"
+  >
+    <Box textAlign="center">
+      <Spinner size="xl" color="white" />
+      <Text color="white" mt={2} fontWeight="bold" fontSize="large">
+        Loading...
+      </Text>
+    </Box>
+  </Box>
+);
+
 function capitalizeWords(str: string) {
   return str.replace(/\b\w/g, (match) => match.toUpperCase());
 }
 
 function CountryList() {
   const { loading, error, data } = useQuery(countryListQuery, { client });
-
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedContinent, setSelectedContinent] = useState("all");
 
-  if (loading) return <Spinner />;
+  const handleFilterClick = (continent: string) => {
+    setSelectedContinent(continent);
+    setSearchTerm("");
+  };
+
+  if (loading) return <LoadingAnimation />;
   if (error) return <Text>Error: {error.message}</Text>;
 
   const countries = data.countries;
-
   const filteredCountries: Country[] = countries.filter((country: Country) => {
     const searchTermMatch =
       country.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       country.continent.name.toLowerCase().includes(searchTerm.toLowerCase());
-
     const continentMatch =
       selectedContinent === "all" ||
       country.continent.name.toLowerCase() === selectedContinent.toLowerCase();
-
     return searchTermMatch && continentMatch;
   });
 
@@ -80,14 +106,14 @@ function CountryList() {
           borderRadius="md"
           justifyContent="center"
           p={1}
-          marginBottom='20px'
-          width='20vw'
+          marginBottom="20px"
+          width={{ base: "40vw", lg: "20vw" }}
+          height="5vh"
         >
           <IconButton
             aria-label="Search"
             icon={<FaSearch />}
             colorScheme="white"
-            mr={2}
           />
           <Input
             placeholder="Search Country"
@@ -101,20 +127,21 @@ function CountryList() {
             }}
           />
         </Box>
-        <Flex alignItems="center" marginBottom='10px'>
+        <Flex alignItems="center" marginBottom="10px">
           {selectedContinent !== "" && (
             <Box
               backgroundColor="teal.500"
               color="white"
               padding={1}
               borderRadius="md"
-              marginRight={2}
-              width="150px"
+              marginRight={1}
+              width={{ base: "30vw", lg: "10vw" }}
+              onClick={() => handleFilterClick("all")}
             >
               Filtering by {capitalizeWords(selectedContinent)}
             </Box>
           )}
-          <Menu >
+          <Menu>
             <MenuButton
               as={IconButton}
               aria-label="Menu"
@@ -147,9 +174,13 @@ function CountryList() {
           </Menu>
         </Flex>
       </Flex>
-      <SimpleGrid columns={{ sm: 1, md: 2, lg: 5 }} spacing={4}>
-        {filteredCountries.map((country) => (
-            <CountryCard key={country.code} country={country} />
+      <SimpleGrid columns={{ base: 2, sm: 3, md: 4, lg: 5 }} spacing={4}>
+        {filteredCountries.map((country, index) => (
+          <AnimatedCountryCard
+            key={country.code}
+            country={country}
+            index={index}
+          />
         ))}
       </SimpleGrid>
     </Box>
